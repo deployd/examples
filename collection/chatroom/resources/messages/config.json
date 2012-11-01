@@ -1,0 +1,29 @@
+{
+	"type": "Collection",
+	"properties": {
+		"sender": {
+			"name": "sender",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "sender",
+			"order": 0
+		},
+		"message": {
+			"name": "message",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "message",
+			"order": 1
+		},
+		"date": {
+			"name": "date",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "date",
+			"order": 2
+		}
+	}
+}

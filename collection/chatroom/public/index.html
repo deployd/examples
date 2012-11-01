@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Deployd Todos</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <style type="text/css">
+    #chatbox {
+      margin-top: 20px;
+      padding: 10px;
+      height: 300px;
+      border: 1px #CCCCCC solid;
+      overflow-y: scroll;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Deployd Chatroom</h1>
+    <ul id="chatbox" class="unstyled">
+
+    </ul>
+    <form class="form-inline">
+      <input type="text" class="input-small" id="screen-name" placeholder="Screen name" />
+      <input type="text" class="input-xlarge" id="message" />
+      <button id="send-btn" class="btn btn-primary">Send</button>
+    </form>
+    <p class="muted">Open this page in multiple browser windows to see it update in real time!</p>
+  </div>
+
+  <script type="text/javascript" src="/js/lib/jquery.js"></script>
+  <script type="text/javascript" src="/dpd.js"></script>
+  <script type="text/javascript" src="/js/chatroom.js"></script>
+</body>
+</html>
