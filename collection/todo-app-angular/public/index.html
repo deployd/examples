@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+	<title>Deployd Todos</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <!-- Angular does some things with CSS so it's good to load this in the head -->
+  <script type="text/javascript" src="/js/lib/angular.js"></script>
+</head>
+<body>
+  <div class="container" ng-controller="TodoController" ng-cloak>
+    <h1>Deployd Todos</h1>
+    <p id="empty" ng-hide="todos.length || !loaded">You don't have any todos! Add one now:</p>
+    <ul id="todos" class="unstyled">
+      <li ng-repeat="todo in todos">
+        <label class="checkbox">
+          <input type="checkbox" ng-model="todo.completed" ng-change="changeCompleted(todo)" />
+          {{todo.title}}
+        </label>
+      </li>
+    </ul>
+    <form class="form-inline">
+      <input id="todo-title" type="text" ng-model="newTodoTitle" />
+      <button id="add-btn" class="btn btn-success" ng-click="addTodo(newTodoTitle)">Add</button>
+    </form>
+    <p>
+      <a href id="remove-completed-btn" ng-click="removeCompletedItems()">Remove completed items</a>
+    </p>
+  </div>
+
+  <script type="text/javascript" src="/js/lib/jquery.js"></script>
+  <script type="text/javascript" src="/dpd.js"></script>
+  <script type="text/javascript" src="/js/todo.js"></script>
+</body>
+</html>
