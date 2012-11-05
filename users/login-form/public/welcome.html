@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Deployd login form</title>
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+</head>
+<body>
+  <div class="container">
+    <h1></h1>
+    <button class="btn" id="logout-btn">Logout</button>
+  </div>
+  <script type="text/javascript" src="/js/lib/jquery.js"></script>
+  <script type="text/javascript" src="/dpd.js"></script>
+  <script type="text/javascript">
+    dpd.users.me(function(user) {
+      if (user) {
+        $('h1').text("Welcome, " + user.username + "!");
+      } else {
+        location.href = "/";
+      }
+    });
+
+    $('#logout-btn').click(function() {
+      dpd.users.logout(function(res, err) {
+        location.href = "/";
+      });
+    });
+  </script>
+</body>
+</html>
