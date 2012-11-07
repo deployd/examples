@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="microblogApp">
+<head>
+  <title>Deployd Microblogging</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Angular does some things with CSS so it's good to load this in the head -->
+  <script type="text/javascript" src="/js/lib/angular.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1>Deployd Microblogging</h1>
+    <h2>Sign up</h2>
+    <form ng-controller="RegisterCtrl">
+      <label>Username</label>
+      <input type="text" class="input-xlarge" ng-model="username" />
+      <label>Password</label>
+      <input type="password" class="input-xlarge" ng-model="password" />
+      <label>Confirm Password</label>
+      <input type="password" class="input-xlarge" ng-model="confirmPassword" />
+      <div>
+        <button class="btn btn-primary" ng-click="register()">Sign up</button>
+        <a href="/" ng-href="{{referrer}}" class="btn btn-link">cancel</a>
+      </div>
+    </form>    
+  </div>
+
+  <script type="text/javascript" src="/js/lib/jquery.js"></script>
+  <script type="text/javascript" src="/dpd.js"></script>
+  <script type="text/javascript" src="/js/global.js"></script>
+  <script type="text/javascript" src="/js/register.js"></script>
+</body>
+</html>

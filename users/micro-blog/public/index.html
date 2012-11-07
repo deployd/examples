@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="microblogApp">
+<head>
+	<title>Deployd Microblogging</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Angular does some things with CSS so it's good to load this in the head -->
+  <script type="text/javascript" src="/js/lib/angular.js"></script>
+</head>
+<body>
+  <div class="container">
+    <ng-include src="'partials/header.html'"></ng-include>
+    <div class="feed" ng-controller="FeedCtrl">
+      <div class="span8">
+        <p ng-hide="currentUser" class="muted">
+          Log in to post a message
+        </p>
+        <form class="well" ng-show="currentUser">
+          <textarea class="input-xxlarge" placeholder="What's up?" ng-model="newPost"></textarea>
+          <div>
+            <button class="btn btn-primary" ng-click="submit(newPost)">Post</button>
+          </div>
+        </form>
+        <ng-include src="'partials/feed.html'"></ng-include>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/lib/jquery.js"></script>
+  <script type="text/javascript" src="/dpd.js"></script>
+  <script type="text/javascript" src="/js/global.js"></script>
+  <script type="text/javascript" src="/js/index.js"></script>
+</body>
+</html>

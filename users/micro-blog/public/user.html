@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html ng-app="microblogApp">
+<head>
+  <title>Deployd Microblogging</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <!-- Angular does some things with CSS so it's good to load this in the head -->
+  <script type="text/javascript" src="/js/lib/angular.js"></script>
+</head>
+<body>
+  <div class="container">
+    <ng-include src="'partials/header.html'"></ng-include>
+
+    <div class="feed" ng-controller="UserFeedCtrl">
+      <div class="span8">
+        <h2>@{{username}}'s feed</h2>
+        <ul class="nav nav-tabs">
+          <li ng-class="{active: feedName == 'posts'}"><a href ng-click="switchFeeds('posts')">Posts</a></li>
+          <li ng-class="{active: feedName == 'mentions'}"><a href ng-click="switchFeeds('mentions')">Mentions</a></li>
+        </ul>
+        <ng-include src="'partials/feed.html'"></ng-include>
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript" src="/js/lib/jquery.js"></script>
+  <script type="text/javascript" src="/dpd.js"></script>
+  <script type="text/javascript" src="/js/global.js"></script>
+  <script type="text/javascript" src="/js/user.js"></script>
+</body>
+</html>

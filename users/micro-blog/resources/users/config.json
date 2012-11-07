@@ -1,0 +1,13 @@
+{
+	"type": "UserCollection",
+	"properties": {
+		"following": {
+			"name": "following",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "following",
+			"order": 0
+		}
+	}
+}

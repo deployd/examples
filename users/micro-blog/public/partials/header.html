@@ -1,0 +1,21 @@
+<div class="header" ng-controller="LoginCtrl">
+  <div class="clearfix">
+    <h1 class="pull-left"><a href="/">Deployd Microblogging</a></h1>
+    <div class="welcome pull-right" ng-show="userLoaded">
+      <span ng-show="currentUser">Welcome, @{{currentUser.username}}! <a href ng-click="logout()">Logout</a></span>
+      <span ng-hide="currentUser"><a href ng-click="showLogin(true)">Login</a> or <a href="/register.html">Sign up</a></span>
+    </div>
+  </div>
+  <div class="well" ng-show="loginVisible">
+    <form>
+      <label>Username</label>
+      <input type="text" ng-model="username" />
+      <label>Password</label>
+      <input type="password" ng-model="password" />
+      <div>
+        <button class="btn btn-primary" ng-click="login()">Log in</button>
+        <button class="btn-link" ng-click="showLogin(false)">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

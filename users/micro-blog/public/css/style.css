@@ -1,0 +1,16 @@
+.header .welcome {
+  margin-top: 18px;
+}
+
+.feed-list .post {
+  border-bottom: 1px #ccc solid;
+  padding: 20px 0;
+}
+
+.feed-list .post .author {
+  font-weight: bold;
+}
+
+.feed .load-more-btn {
+  padding: 10px 0;
+}

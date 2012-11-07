@@ -1,0 +1,7 @@
+<div class="feed-list">
+  <div class="post" ng-repeat="post in feed.posts">
+    <div class="author"><a ng-href="/user.html?user={{post.creatorName}}">@{{post.creatorName}}</a></div>
+    <div dpd-message-for="post"></div>
+  </div>
+</div>
+  <button class="btn btn-link load-more-btn" ng-show="feed.moreToLoad" ng-click="feed.loadPosts()">Show more</button>
