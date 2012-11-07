@@ -3,7 +3,7 @@ if (!this.message) {
 } else if (this.message.length > 140) {
     error('message', "must be below 140 characters");
 } else {
-    var mentions = this.message.match(/@[a-z0-9]+/ig).map(function(m) {
+    var mentions = (this.message.match(/@[a-z0-9]+/ig) || []).map(function(m) {
         //Drop the @
         return m.replace('@', '');
     });
