@@ -1,0 +1,17 @@
+{
+   "type":"Collection",
+   "properties":{
+      "comment":{
+        "required":true,
+        "type":"string",
+        "typeLabel":"string",
+        "id":"comment"
+      },
+      "name":{
+        "required":false,
+        "type":"string",
+        "typeLabel":"string",
+        "id":"name"
+      }
+   }
+}

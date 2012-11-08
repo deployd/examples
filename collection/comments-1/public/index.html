@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+  <html>
+  <head>
+    <title>Deployd Tutorial</title>
+    <style type="text/css">
+      body { font-size: 16pt; }
+      .container { width: 960px; margin-left: auto; margin-right: auto; }
+      form { border: #cccccc 1px solid; padding: 20px; margin-bottom: 10px; -moz-border-radius: 5px; -webkit-border-radius: 5px; border-radius: 5px; }
+      .form-element { margin-bottom: 10px; }
+      #refresh-btn { margin-bottom: 20px; }
+      .comment { padding: 10px; margin-bottom: 10px; border-bottom: #cccccc 1px solid; }
+      .comment .links { float: right; }
+      .comment .links a { margin-left: 10px; }
+      .comment .author { font-style: italic; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="comments">
+      </div>
+      <button id="refresh-btn">Refresh</button>
+      <form id="comment-form">
+        <div class="form-element">
+          <label for="name">Name: </label>
+          <input type="text" id="name" name="name" />
+        </div>
+        <div class="form-element">
+          <textarea id="comment" name="comment" rows="5" cols="50"></textarea>
+        </div>
+        <div class="form-element">
+          <button type="submit">Add New Comment</button>
+        </div>
+      </form>
+    </div>
+    
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/dpd.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </body>
+  </html>
