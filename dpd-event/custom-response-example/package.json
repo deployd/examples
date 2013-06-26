@@ -1,0 +1,16 @@
+{
+  "name": "custom-response-example",
+  "version": "0.0.0",
+  "description": "custom response",
+  "main": "index.js",
+  "dependencies": {
+    "dpd-event": "~0.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD"
+}
