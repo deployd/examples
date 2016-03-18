@@ -1,0 +1,98 @@
+const React = require('react');
+const ReactDOM = require('react-dom');
+
+class App extends React.Component {
+  constructor(){
+    super();
+    this.state = { todos: []};
+  }
+
+  addTask(e){
+    e.preventDefault();
+    const todos = this.state.todos;
+    const title = this.input.value;
+
+    if (title) {
+      this.setState({
+        todos: [
+          ...todos,
+          {
+            title: this.input.value,
+            done: false
+          }
+        ]
+      });
+
+      this.input.value = '';
+    }
+  }
+
+  toggleTask(i){
+    const todos = this.state.todos;
+    this.setState({
+      todos: [
+        ...todos.slice(0, i),
+        {
+          title: todos[i].title,
+          done: !todos[i].done
+        },
+        ...todos.slice(i+1)
+      ]
+    });
+  }
+
+  removeDoneTasks(e){
+    e.preventDefault();
+
+    const todos = this.state.todos.filter(t => !t.done);
+    this.setState({ todos });
+  }
+
+  render(){
+    var noTasks;
+    if (!this.state.todos.length)
+      noTasks = (<p id="empty">You don't have any todos! Add one now:</p>);
+
+    return (
+      <div className="container">
+        <h1>Deployd Todos</h1>
+        { noTasks }
+        <ul id="todos" className="unstyled">
+          {
+            this.state.todos.map((todo, index) =>
+              {
+                return (
+                  <li>
+                    <label className="checkbox">
+                      <input type="checkbox" onClick={ this.toggleTask.bind(this, index) } checked={todo.done}/>
+                      <span>{ todo.title }</span>
+                    </label>
+                  </li>
+                );
+              }
+            )
+
+          }
+        </ul>
+        <form className="form-inline">
+          <input
+            id="todo-title"
+            type="text"
+            ref={ (node) => this.input = node }
+          />
+          <button
+            id="add-btn"
+            className="btn btn-success"
+            onClick={ this.addTask.bind(this) }
+          >Add</button>
+        </form>
+        <p>
+          <a href id="remove-completed-btn" onClick={ this.removeDoneTasks.bind(this) }>Remove completed</a>
+        </p>
+      </div>
+    );
+  }
+}
+
+
+ReactDOM.render(<App/>, document.getElementById('app'));

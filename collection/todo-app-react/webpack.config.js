@@ -2,9 +2,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 
 const sources = [
-  './node_modules/react/dist/react.min.js',
-  './node_modules/react-dom/dist/react-dom.min.js',
-  './app/index.js'
+  './app/index.jsx'
 ];
 
 module.exports = {
@@ -17,7 +15,14 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js/, loader: 'babel' },
+      {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          presets: ['react', 'es2015']
+        }
+      },
       { test: /\.html$/, loader: 'html' },
       { test: /\.css$/, loader: ExtractTextPlugin.extract('css') }
     ]
