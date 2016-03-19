@@ -4,7 +4,11 @@ const ReactDOM = require('react-dom');
 class App extends React.Component {
   constructor(){
     super();
+
     this.state = { todos: []};
+
+    dpd.todos.get()
+      .then(todos => this.setState({ todos }));
   }
 
   addTask(e){
@@ -13,39 +17,50 @@ class App extends React.Component {
     const title = this.input.value;
 
     if (title) {
-      this.setState({
-        todos: [
-          ...todos,
-          {
-            title: this.input.value,
-            done: false
-          }
-        ]
-      });
+      dpd.todos.post({ title }, (result, error) => {
+        if (error) throw new Error(error);
 
-      this.input.value = '';
+        this.setState({
+          todos: [
+            ...todos,
+            {
+              id: result.id,
+              title: this.input.value,
+              done: false
+            }
+          ]
+        });
+
+        this.input.value = '';
+      });
     }
   }
 
   toggleTask(i){
     const todos = this.state.todos;
-    this.setState({
-      todos: [
-        ...todos.slice(0, i),
-        {
-          title: todos[i].title,
-          done: !todos[i].done
-        },
-        ...todos.slice(i+1)
-      ]
+    const updatedTodo = Object.assign({}, todos[i], {done: !todos[i].done});
+
+    dpd.todos.put(updatedTodo, (result, error) => {
+      this.setState({
+        todos: [
+          ...todos.slice(0, i),
+          result,
+          ...todos.slice(i+1)
+        ]
+      });
     });
   }
 
   removeDoneTasks(e){
     e.preventDefault();
+    const todos = this.state.todos.filter(t => t.done);
 
-    const todos = this.state.todos.filter(t => !t.done);
-    this.setState({ todos });
+    todos.forEach(todo => {
+      dpd.todos.del(todo.id, (_, error) => {
+        if (error) throw new Error(error);
+        this.setState({ todos: this.state.todos.filter(t => t !== todo) });
+      });
+    });
   }
 
   render(){
@@ -62,7 +77,7 @@ class App extends React.Component {
             this.state.todos.map((todo, index) =>
               {
                 return (
-                  <li>
+                  <li key={todo.id}>
                     <label className="checkbox">
                       <input type="checkbox" onClick={ this.toggleTask.bind(this, index) } checked={todo.done}/>
                       <span>{ todo.title }</span>

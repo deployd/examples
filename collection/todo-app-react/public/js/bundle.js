@@ -75,52 +75,75 @@
 	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
 
 	    _this.state = { todos: [] };
+
+	    dpd.todos.get().then(function (todos) {
+	      return _this.setState({ todos: todos });
+	    });
 	    return _this;
 	  }
 
 	  _createClass(App, [{
 	    key: 'addTask',
 	    value: function addTask(e) {
+	      var _this2 = this;
+
 	      e.preventDefault();
 	      var todos = this.state.todos;
 	      var title = this.input.value;
 
 	      if (title) {
-	        this.setState({
-	          todos: [].concat(_toConsumableArray(todos), [{
-	            title: this.input.value,
-	            done: false
-	          }])
-	        });
+	        dpd.todos.post({ title: title }, function (result, error) {
+	          if (error) throw new Error(error);
 
-	        this.input.value = '';
+	          _this2.setState({
+	            todos: [].concat(_toConsumableArray(todos), [{
+	              id: result.id,
+	              title: _this2.input.value,
+	              done: false
+	            }])
+	          });
+
+	          _this2.input.value = '';
+	        });
 	      }
 	    }
 	  }, {
 	    key: 'toggleTask',
 	    value: function toggleTask(i) {
+	      var _this3 = this;
+
 	      var todos = this.state.todos;
-	      this.setState({
-	        todos: [].concat(_toConsumableArray(todos.slice(0, i)), [{
-	          title: todos[i].title,
-	          done: !todos[i].done
-	        }], _toConsumableArray(todos.slice(i + 1)))
+	      var updatedTodo = Object.assign({}, todos[i], { done: !todos[i].done });
+
+	      dpd.todos.put(updatedTodo, function (result, error) {
+	        _this3.setState({
+	          todos: [].concat(_toConsumableArray(todos.slice(0, i)), [result], _toConsumableArray(todos.slice(i + 1)))
+	        });
 	      });
 	    }
 	  }, {
 	    key: 'removeDoneTasks',
 	    value: function removeDoneTasks(e) {
-	      e.preventDefault();
+	      var _this4 = this;
 
+	      e.preventDefault();
 	      var todos = this.state.todos.filter(function (t) {
-	        return !t.done;
+	        return t.done;
 	      });
-	      this.setState({ todos: todos });
+
+	      todos.forEach(function (todo) {
+	        dpd.todos.del(todo.id, function (_, error) {
+	          if (error) throw new Error(error);
+	          _this4.setState({ todos: _this4.state.todos.filter(function (t) {
+	              return t !== todo;
+	            }) });
+	        });
+	      });
 	    }
 	  }, {
 	    key: 'render',
 	    value: function render() {
-	      var _this2 = this;
+	      var _this5 = this;
 
 	      var noTasks;
 	      if (!this.state.todos.length) noTasks = React.createElement(
@@ -144,11 +167,11 @@
 	          this.state.todos.map(function (todo, index) {
 	            return React.createElement(
 	              'li',
-	              null,
+	              { key: todo.id },
 	              React.createElement(
 	                'label',
 	                { className: 'checkbox' },
-	                React.createElement('input', { type: 'checkbox', onClick: _this2.toggleTask.bind(_this2, index), checked: todo.done }),
+	                React.createElement('input', { type: 'checkbox', onClick: _this5.toggleTask.bind(_this5, index), checked: todo.done }),
 	                React.createElement(
 	                  'span',
 	                  null,
@@ -165,7 +188,7 @@
 	            id: 'todo-title',
 	            type: 'text',
 	            ref: function ref(node) {
-	              return _this2.input = node;
+	              return _this5.input = node;
 	            }
 	          }),
 	          React.createElement(
